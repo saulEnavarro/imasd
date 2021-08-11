@@ -1,0 +1,50 @@
+﻿@using IMASD.Models;
+@model PaymentsCLS
+@{
+    ViewBag.Title = "Editar";
+    List<SelectListItem> listEmployee = (List<SelectListItem>)ViewBag.listEmployee;
+}
+
+<h2>Editar</h2>
+<div class="row">
+    <div class="col-md-6">
+
+        @using (Html.BeginForm("Editar", "Payment", "POST", FormMethod.Post, new { @id = "confEditar" }))
+        {<div>
+                @Html.Label("Id Registro")
+                @Html.TextBoxFor(p => p.idPayment, new { @class = "form-control", @readOnly = true })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.idEmployee)
+                @Html.DropDownList("idEmployee", listEmployee, null, new { @class = "form-control", @disabled = "disabled" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.paymentAmount)
+                @Html.TextBoxFor(p => p.paymentAmount, new { @class = "form-control" })
+                @Html.ValidationMessage("paymentAmount", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div style="">
+                @Html.LabelFor(p => p.paymentDate)
+                @Html.EditorFor(p => p.paymentDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("paymentDate", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div style="margin:auto">
+
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    var confEditar = document.getElementById("confEditar");
+    confEditar.onsubmit = function(e){
+        e.preventDefault();
+        if (confirm("¿Deseas guardar los cambios?") == 1) {
+            confEditar.submit();
+        }
+    }
+
+</script>

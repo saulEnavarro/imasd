@@ -1,0 +1,69 @@
+﻿@using IMASD.Models
+@model List<PaymentsCLS>
+@{
+    List<SelectListItem> listDepartments = (List<SelectListItem>)ViewBag.listDepartment;
+    List<SelectListItem> listEmployee = (List<SelectListItem>)ViewBag.listEmployee;
+    ViewBag.Title = "Index";
+}
+<br />
+<h2>Pagos</h2>
+@Html.ActionLink("Agregar", "Agregar", "Payment", null, new { @class = "btn btn-primary" })
+<br />
+<div class="row">
+    <div class="col-md-3">
+        @using (Html.BeginForm("Index", "Payment", FormMethod.Get, new { @id = "searchPayment" }))
+        {
+            <br />
+            @Html.Label("Buscar por departamento");
+            @Html.DropDownList("idDepartment", listDepartments,null, new { @class = "form-control" })}
+    </div>
+    <div class="col-md-3">
+
+        @using (Html.BeginForm("Index", "Payment", FormMethod.Get, new { @id = "searchPayment2" }))
+        {
+            <br />
+            @Html.Label("Buscar por departamento");
+            @Html.DropDownList("idEmployee", listEmployee,null, new { @class = "form-control" })}
+        <br />
+    </div>
+    <div class="col-md-9"></div>
+</div>
+    <h2>Index</h2>
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <td>@Html.LabelFor(P => Model[0].idEmployee)</td>
+                <td>@Html.LabelFor(P => Model[0].nameEmployee)</td>
+                <td>@Html.LabelFor(P => Model[0].paymentAmount)</td>
+                <td>@Html.LabelFor(P => Model[0].paymentDate)</td>
+                <td class="text-center"><b>Editar<b /></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.idEmployee</td>
+                    <td>@item.nameEmployee</td>
+                    <td>@item.paymentAmount</td>
+                    <td>@item.paymentDate</td>
+                    <td class="text-center">
+                        @Html.ActionLink(" ", "Editar", "Payment", new { id = @item.idPayment }, new { @class = "glyphicon glyphicon-usd btn btn-success " })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script>
+        var idDepartment = document.getElementById("idDepartment");
+        idDepartment.onchange = function () {
+            var searchPayment = document.getElementById("searchPayment")
+            searchPayment.submit();
+        }
+        var idEmployee = document.getElementById("idEmployee");
+        idEmployee.onchange = function () {
+            var searchPayment2 = document.getElementById("searchPayment2")
+            searchPayment2.submit();
+        }
+    </script>

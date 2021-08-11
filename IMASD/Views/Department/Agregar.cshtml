@@ -1,0 +1,30 @@
+﻿@using IMASD.Models
+@model DepartmentCLS 
+@{
+    ViewBag.Title = "Agregar";
+}
+
+<h2>Agregar</h2>
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("Agregar","Department","POST"))
+            {
+        <div>
+            @Html.LabelFor(p=>p.department)
+            @Html.TextBoxFor(p=>p.department, new { @class = "form-control" })
+            @Html.ValidationMessage("department",new {@class="text-danger"})
+        </div>
+        <div>
+            @Html.LabelFor(p => p.location)
+            @Html.TextBoxFor(p => p.location, new { @class = "form-control" })
+            @Html.ValidationMessage("location", new { @class = "text-danges" })
+        </div>
+        <br />
+        <div style="margin:auto">
+            <input type="submit" class="btn btn-primary" value="Guardar" />
+        </div>
+            }
+
+    </div>
+</div>
+

@@ -1,0 +1,57 @@
+﻿@using IMASD.Models
+@model List<EmployeeCLS>
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<h2>Empleados</h2>
+@Html.ActionLink("Agregar", "Agregar", "Employee", null, new { @class = "btn btn-primary" })
+<br /><br />
+<table class="table table-bordered table-hover">
+    <thead class="fw-bold">
+        <tr>
+            <td width="10%">Id Emp.</td>
+            <td width="10%">Nombre</td>
+            <td width="10%">Apellido</td>
+            <td width="10%">Teléfono</td>
+            <td width="10%">Mail</td>
+            <td width="10%">Dirección</td>
+            <td width="10%">Cargo</td>
+            <td width="10%">Departamento</td>
+            <td width="10%">Salario</td>
+            <td width="10">Opciones</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.idEmployee</td>
+            <td>@item.name</td>
+            <td>@item.lastName</td>
+            <td>@item.phoneNumber</td>
+            <td>@item.mail</td>
+            <td>@item.direction</td>
+            <td>@(item.typeUser == 2 ? "Supervisor" : "Colaborador")</td>
+            <td>@item.departmentName</td>
+            <td>@item.amoutSalary</td>
+            <td>
+                @Html.ActionLink(" ", "Editar", "Employee", new { id = @item.idEmployee }, new { @class = "glyphicon glyphicon-edit btn btn-primary" }) 
+                @Html.ActionLink(" ", "Eliminar", "Employee", new { id = @item.idEmployee }, new { @class = "glyphicon glyphicon-trash btn btn-danger", @onclick = "eliminar()" }) 
+            </td>    
+
+        </tr>
+        }
+    </tbody>
+
+
+</table>
+<script>
+    function eliminar() {
+        if (confirm("¿Desea eliminar este Usuario ?") == 1) {
+            alert("Eliminado correctamente");
+        } else {
+            event.preventDefault();
+        }
+    }
+</script>

@@ -1,0 +1,48 @@
+﻿@using IMASD.Models
+@model List<DepartmentCLS>
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<h2>Departamentos</h2>
+@Html.ActionLink("Agregar", "Agregar", "Department", null, new { @class = "btn btn-primary" })
+<br />
+<br />
+
+<table class="table table-bordered table-hover">
+    <thead class="fw-bold">
+        <tr>
+            <td width="10">@Html.LabelFor(p => Model[0].idDepartment)</td>
+            <td width="30">@Html.LabelFor(p => Model[0].department)</td>
+            <td width="30">@Html.LabelFor(p => Model[0].location)</td>
+            <td width="30">Opciones</td>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.idDepartment</td>
+            <td>@item.department</td>
+            <td>@item.location</td>
+            <td>
+                @Html.ActionLink(" ", "Editar", "Department", new { id = @item.idDepartment }, new { @class = "glyphicon glyphicon-edit btn btn-primary" })
+                @Html.ActionLink(" ", "Eliminar", "Department", new { id = @item.idDepartment }, new {@class = "glyphicon glyphicon-trash btn btn-danger", @onclick = "eliminar()" })
+            </td>
+        </tr>
+                }
+          
+        </tbody>
+</table>
+
+<script>
+    function eliminar() {
+        if (confirm("¿Desea eliminar este departamento?") == 1) {
+            alert("Eliminado Correctamente");
+        } else {
+            event.prevenDefault();
+        }
+    }
+</script>

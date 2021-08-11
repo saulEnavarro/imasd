@@ -1,0 +1,46 @@
+﻿@using IMASD.Models
+@model List<SalaryCLS>
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<h2>Salarios</h2>
+@Html.ActionLink("Agregar", "Agregar", "Salary", null, new { @class = "btn btn-primary" })
+<br />
+<br />
+<table class="table table-hover table-bordered">
+    <thead class="fw-bold">
+        <tr>
+            <td width="10%">@Html.LabelFor(P => Model[0].idSalary)</td>
+            <td width="30">@Html.LabelFor(P => Model[0].amount)</td>
+            <td width="30">@Html.LabelFor(P => Model[0].currency)</td>
+            <td width="30">Opciones</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.idSalary</td>
+            <td>@item.amount</td>
+            <td>@item.currency</td>
+            <td>
+                @Html.ActionLink(" ", "Editar", "Salary", new { id = @item.idSalary }, new { @class = "glyphicon glyphicon-edit btn btn-primary" })
+                @Html.ActionLink(" ", "Eliminar", "Salary", new { id = @item.idSalary }, new { @class = "glyphicon glyphicon-trash btn btn-danger",@onclick="elimiinar()" })
+            </td>
+        </tr>
+                }
+           
+        </tbody>
+</table>
+
+<script>
+    function elimiinar() {
+        if (confirm("¿Desea eliminar este salario?") == 1) {
+            alert("Eliminado Correctamente");
+        } else {
+            event.preventDefault();
+        }
+    }
+</script>

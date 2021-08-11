@@ -1,0 +1,50 @@
+﻿@using IMASD.Models
+@model DepartmentCLS
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h2>Editar</h2>
+
+
+<h2>Agregar</h2>
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("Editar", "Department", "POST", FormMethod.Post, new { @id = "confEditar" }))
+        {
+            <div>
+                @Html.LabelFor(p => p.idDepartment)
+                @Html.TextBoxFor(p => p.idDepartment, new { @class = "form-control" ,@readOnly=true})
+  
+            </div>
+            <div>
+                @Html.LabelFor(p => p.department)
+                @Html.TextBoxFor(p => p.department, new { @class = "form-control" })
+                @Html.ValidationMessage("department", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.location)
+                @Html.TextBoxFor(p => p.location, new { @class = "form-control" })
+                @Html.ValidationMessage("location", new { @class = "text-danges" })
+            </div>
+            <br />
+
+            <div style="margin:auto">
+                <input type="submit" class="btn btn-primary" value="Guardar" />
+                @Html.ActionLink("Regresar", "Index", "Department", null, new { @class = "btn btn-danger" });
+            </div>
+        }
+
+    </div>
+</div>
+
+<script>
+    var confEditar = document.getElementById("confEditar");
+    confEditar.onsubmit = function(e){
+        e.preventDefault();
+        if (confirm("¿Deseas guardar los cambios?") == 1) {
+            confEditar.submit();
+        }
+    }
+
+</script>

@@ -1,0 +1,36 @@
+﻿@using IMASD.Models;
+@model PaymentsCLS
+@{
+    ViewBag.Title = "Agregar";
+    List<SelectListItem> listEmployee = (List<SelectListItem>)ViewBag.listEmployee;
+}
+<h2>Agregar</h2>
+
+<div class="row">
+    <div class="col-md-6">
+
+        @using (Html.BeginForm("Agregar", "Payment", "POST"))
+        {
+            <div>
+                @Html.LabelFor(p => p.idEmployee)
+                @Html.DropDownList("idEmployee", listEmployee, null, new { @class = "form-control" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.paymentAmount)
+                @Html.TextBoxFor(p => p.paymentAmount, new { @class = "form-control" })
+                @Html.ValidationMessage("paymentAmount", new { @class = "text-danger" })
+            </div>
+            <br/>  
+            <div style="">
+                @Html.LabelFor(p => p.paymentDate)
+                @Html.EditorFor(p => p.paymentDate, new {htmlAttributes=new { @class = "form-control" } })
+                @Html.ValidationMessage("paymentDate", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div style="margin:auto">
+
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+            }
+        </div>
+    </div>

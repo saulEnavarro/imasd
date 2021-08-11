@@ -1,0 +1,62 @@
+﻿@using IMASD.Models
+@model EmployeeCLS
+@{
+    ViewBag.Title = "Agregar";
+    List<SelectListItem> listDepartments =(List<SelectListItem>) ViewBag.listDepartment;
+    List<SelectListItem> listSalary = (List<SelectListItem>) ViewBag.listSalaries;
+}
+
+<h2>Agregar</h2>
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("Agregar", "Employee", "POST", FormMethod.Post))
+        {
+            <div>
+                @Html.LabelFor(p => p.name)
+                @Html.TextBoxFor(p => p.name, new { @class = "form-control" })
+                @Html.ValidationMessage("name", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.lastName)
+                @Html.TextBoxFor(p => p.lastName, new { @class = "form-control" })
+                @Html.ValidationMessage("lastName", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.phoneNumber)
+                @Html.TextBoxFor(p => p.phoneNumber, new { @class = "form-control" })
+                @Html.ValidationMessage("phoneNumber", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.mail)
+                @Html.TextBoxFor(p => p.mail, new { @class = "form-control" })
+                @Html.ValidationMessage("mail", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.direction)
+                @Html.TextBoxFor(p => p.direction, new { @class = "form-control" })
+                @Html.ValidationMessage("direction", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.typeUser)
+                @Html.DropDownList("typeUser", new List<SelectListItem>{
+                                               new SelectListItem{ Text = "--Seleccione--", Value = "" },
+                                               new SelectListItem{ Text = "Colaborador", Value = "1" },
+                                               new SelectListItem{ Text = "Supervisor", Value = "2" }
+                                            }, new { onchange = "getAlldata()", @class = "form-control" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.idDepartment)
+                @Html.DropDownList("idDepartment", listDepartments, null, new { @class = "form-control" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.idSalary)
+                @Html.DropDownList("idSalary", listSalary, null, new { @class = "form-control" })
+            </div>
+
+            <br />
+            <div style="margin:auto">
+                <input type="submit" class="btn btn-primary" value="Guardar" />
+            </div>
+        }
+    </div>
+</div>
